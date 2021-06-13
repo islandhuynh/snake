@@ -8,6 +8,9 @@ class Food(Turtle):
     self.penup()
     self.color("red")
     self.speed("fastest")
+    self.refresh()
+  
+  def refresh(self):
     x_position = random.randint(-280, 280)
     y_position = random.randint(-280, 280)
     self.goto(x_position, y_position)

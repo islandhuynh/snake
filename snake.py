@@ -11,6 +11,7 @@ class Snake:
     self.segments = []
     self.new_snake()
     self.head = self.segments[0]
+    self.tail = self.segments[len(self.segments) - 1]
 
   def new_snake(self):
     for position in STARTING_POSITIONS:
