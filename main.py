@@ -10,22 +10,10 @@ screen.tracer(0)
 
 snake = Snake()
 
-def move_up():
-  snake.segments[0].setheading(90)
-
-def move_down():
-  snake.segments[0].setheading(270)
-
-def move_left():
-  snake.segments[0].setheading(180)
-
-def move_right():
-  snake.segments[0].setheading(0)
-
-screen.onkey(move_up, "w")
-screen.onkey(move_down, "s")
-screen.onkey(move_left, "a")
-screen.onkey(move_right, "d")
+screen.onkey(snake.move_up, "w")
+screen.onkey(snake.move_down, "s")
+screen.onkey(snake.move_left, "a")
+screen.onkey(snake.move_right, "d")
 screen.listen()
 
 game_is_on = True

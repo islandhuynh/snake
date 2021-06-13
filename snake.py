@@ -1,5 +1,11 @@
 import random
 from turtle import Turtle, Screen
+STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
+MOVE_DISTANCE = 20
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
 
 class Snake:
   def __init__(self):
@@ -7,12 +13,13 @@ class Snake:
     self.score = 0
     self.new_snake()
     self.new_food()
+    self.head = self.segments[0]
 
   def new_snake(self):
-    starting_positions = [(0, 0), (-20, 0), (-40, 0)]
-    for position in starting_positions:
+    for position in STARTING_POSITIONS:
       new_segment = Turtle("square")
       new_segment.color("green")
+      new_segment.penup()
       new_segment.goto(position)
       new_segment.speed(0)
       self.segments.append(new_segment)
@@ -22,11 +29,28 @@ class Snake:
       new_x = self.segments[seg_num - 1].xcor()
       new_y = self.segments[seg_num - 1].ycor()
       self.segments[seg_num].goto(new_x, new_y)
-    self.segments[0].forward(20)
+    self.head.forward(MOVE_DISTANCE)
 
   def new_food(self):
     food = Turtle("square")
     food.color("red")
+    food.penup()
     x_position = random.randint(-290, 290)
     y_position = random.randint(-290, 290)
     food.goto(x_position, y_position)
+
+  def move_up(self):
+    if self.head.heading() != DOWN:
+      self.head.setheading(UP)
+
+  def move_down(self):
+    if self.head.heading() != UP:
+      self.head.setheading(DOWN)
+
+  def move_left(self):
+    if self.head.heading() != RIGHT:
+      self.head.setheading(LEFT)
+
+  def move_right(self):
+    if self.head.heading() != LEFT:
+      self.head.setheading(RIGHT)
