@@ -52,24 +52,16 @@ for position in starting_positions:
   segments.append(new_segment)
 
 def move_up():
-  for x in range(0, len(segments)):
-    segments[x].forward(x*20)
-    segments[x].setheading(90)
+  segments[0].setheading(90)
 
 def move_down():
-  for x in range(0, len(segments)):
-    segments[x].forward(x*20)
-    segments[x].setheading(270)
+  segments[0].setheading(270)
 
 def move_left():
-  for x in range(0, len(segments)):
-    segments[x].forward(x*20)
-    segments[x].setheading(180)
+  segments[0].setheading(180)
 
 def move_right():
-  for x in range(0, len(segments)):
-    segments[x].forward(x*20)
-    segments[x].setheading(0)
+  segments[0].setheading(0)
 
 screen.onkey(move_up, "w")
 screen.onkey(move_down, "s")
@@ -81,9 +73,12 @@ game_is_on = True
 while game_is_on:
   screen.update()
   time.sleep(0.1)
-  for seg in segments:
-    seg.forward(20)
-    if seg.xcor() > 300 or seg.xcor() < -300 or seg.ycor() > 300 or seg.ycor() < -300:
-      game_is_on = False
+  for seg_num in range(len(segments)-1, 0, -1):
+    new_x = segments[seg_num - 1].xcor()
+    new_y = segments[seg_num - 1].ycor()
+    segments[seg_num].goto(new_x, new_y)
+  segments[0].forward(20)
+  if segments[0].xcor() > 300 or segments[0].xcor() < -300 or segments[0].ycor() > 300 or segments[0].ycor() < -300:
+    game_is_on = False
 
 screen.exitonclick()
